@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun InicioScreen(NavigateToLogin: () -> Unit, NavigateToRegistro: () -> Unit) {
@@ -31,4 +32,10 @@ fun InicioScreen(NavigateToLogin: () -> Unit, NavigateToRegistro: () -> Unit) {
 
 
     }
+}
+
+@Preview
+@Composable
+fun preview(){
+    Text("abkljfbkjas")
 }
