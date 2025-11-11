@@ -20,13 +20,25 @@ fun NavigationWrapper() {
         composable<Login> {
 //para pasar la funcionalidad del boton que hay en la pantalla,mandamos una Lambda
 //si la lambda es lo último (o lo único que se manda) podemos poner directamente paréntesis en lugar de llaves!
+            /*
+            //esto da error porque LoginScreen esperaba parametros no una lamda directamente
+            sin asociar a ningun paramentro
             LoginScreen() {navController.navigate(Vista(email,pass))}
+             */
+            LoginScreen(
+                //le paso esta funcion lamda para que cuando se necesario vaya a la vista
+                NavigateToVista = { email, pass -> navController.navigate(Vista(email, pass)) },
+                //le pasamos tambien NavigateToRegistro para que al cambiar cuando haya que cambiar al registro
+                //la pantalla de login no lo haga directamente sino que llama a la funcion que le fue pasada por el controlador
+                NavigateToRegistro = { navController.navigate(Registro) }
+            )
         }
         composable<Inicio> {
             InicioScreen({ navController.navigate(Login)}
                 , { navController.navigate(Registro)})
         }
         composable<Registro> {
+            //esta no da error porque la pantalla registrar solo espera una lamda sin parametros
             RegisterScreen(){navController.navigate(Login)}
         }
 //si queremos mandar un dato a la vista, necesitamos el NavBackStackEntry de la ruta
