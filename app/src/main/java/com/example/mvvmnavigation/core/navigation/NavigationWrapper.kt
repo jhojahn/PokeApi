@@ -46,11 +46,20 @@ fun NavigationWrapper() {
             val vista = it.toRoute<Vista>() //cogemos el object vista
 /*podemos pasar el parámetro nombre y la lambda, si tuviéramos más parámetros,
 bastaría con poner el nombre de cada uno seguido de un = y el valor*/
-            VistaScreen(vista.email, pass = vista.pass){navController.navigate(Login) {
-//volveríamos a Inicio, quitando del stack del navigation lo anterior (para cerrar sesión por ejemplo)
-                popUpTo<Login>{inclusive=true}
+            VistaScreen(
+                email = vista.email,
+                pass = vista.pass,
+                NavigateToLogin = {
+                    navController.navigate(Login) {
+                        popUpTo<Login> { inclusive = true }
+                    }
                 }
-            }
+            )
+            //VistaScreen(vista.email, pass = vista.pass){navController.navigate(Login) {
+//volveríamos a Inicio, quitando del stack del navigation lo anterior (para cerrar sesión por ejemplo)
+               // popUpTo<Login>{inclusive=true}
+               // }
+            //}
         }
     }
 }
