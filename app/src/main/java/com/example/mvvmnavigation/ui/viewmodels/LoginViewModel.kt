@@ -44,21 +44,28 @@ class LoginViewModel : ViewModel(){
             return
         }
 
+
         viewModelScope.launch {
-            _isLoading.value=true
-            val  result = authRepository.login(emailValue, passwordValue)
+            _isLoading.value = true
 
-            result.onSuccess {
-                _isLoginOk.value = true
-            }.onFailure { e ->
-                _errorMessage.value = e.message
+            try {
+                val result = authRepository.login(emailValue, passwordValue)
+
+                result.onSuccess {
+                    _isLoginOk.value = true
+                    _errorMessage.value = null
+                }.onFailure { e ->
+                    _errorMessage.value = e.message ?: "incorrectos"
+                }
+
+            } catch (e: Exception) {
+                // Captura cualquier excepción no controlada
+                e.printStackTrace()
+                _errorMessage.value = e.message ?: "Error"
+                _isLoginOk.value = false
+            } finally {
+                _isLoading.value = false
             }
-
-
-            _isLoading.value = false
         }
-
-
     }
-
 }
