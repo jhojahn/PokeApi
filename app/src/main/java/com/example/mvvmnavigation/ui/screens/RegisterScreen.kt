@@ -70,10 +70,10 @@ fun RegisterScreen(viewModel: RegisterViewModel = viewModel(),
             Spacer(Modifier.height(20.dp))
             Button(onClick = NavigateToLogin) { Text("Volver") }
 
-            message?.let {
+            //message?.let {
                 Spacer(Modifier.height(16.dp))
-                Text(it, color = if (it.contains("correctamente")) Color.Green else Color.Red)
-            }
+                //Text(it, color = if (it.contains("correctamente")) Color.Green else Color.Red)
+            //}
         }
     }
 }
